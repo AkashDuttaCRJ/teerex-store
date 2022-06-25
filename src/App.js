@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import Navbar from './components/Navbar';
+import Cart from './pages/Cart';
+import Products from './pages/Products';
 
 function App() {
+  const [response, setResponse] = useState()
+  const [data, setData] = useState()
+  const [activeNavEl, setActiveNavEl] = useState(0)
+
+  const url = 'https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json'
+
+  useEffect(() => {
+    const getData = async () => {
+      const resp = await (await fetch(url)).json()
+      console.log(resp);
+      setResponse(resp)
+      setData(resp)
+    }
+    getData()
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar activeEl={activeNavEl} setActiveEl={setActiveNavEl} />
+      {activeNavEl === 0 && data && <Products data={data} />}
+      {activeNavEl === 1 && <Cart />}
     </div>
   );
 }

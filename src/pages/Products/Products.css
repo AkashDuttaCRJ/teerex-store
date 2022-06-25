@@ -1,0 +1,53 @@
+.products-page {
+}
+
+.results-container {
+    display: flex;
+    padding-inline: 2rem;
+}
+
+.filter-container {
+    margin-top: 3rem;
+    width: 25%;
+    justify-content: start;
+    padding-inline: 3rem;
+}
+
+.filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.filter-header-label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.filter-clear-btn {
+    font-size: 12px;
+    font-weight: 500;
+    color: #dd3737;
+    cursor: pointer;
+}
+
+.filter-clear-btn:hover {
+    text-decoration: underline;
+}
+
+.products-container {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    /* width: 70%; */
+}
+
+.filter-group {
+    margin-bottom: 5px;
+}
+
+.filter-item {
+    margin-left: 15px;
+}
