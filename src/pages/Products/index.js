@@ -2,7 +2,7 @@ import './Products.css'
 import ProductCard from '../../components/ProductCard'
 import { useEffect, useState } from 'react'
 
-const Products = ({ data }) => {
+const Products = ({ data, setData, originalData }) => {
     const [filterOptions, setFilterOptions] = useState([])
     const [typeFilter, setTypeFilter] = useState(null)
     const [colorFilter, setColorFilter] = useState(null)
@@ -52,24 +52,43 @@ const Products = ({ data }) => {
         const filters = [
             {
                 'label': 'Type',
-                'values': getType(data)
+                'values': getType(originalData)
             },
             {
                 'label': 'Colour',
-                'values': getColour(data)
+                'values': getColour(originalData)
             },
             {
                 'label': 'Price',
-                'values': getPrice(data)
+                'values': getPrice(originalData)
             },
             {
                 'label': 'Gender',
-                'values': getGender(data)
+                'values': getGender(originalData)
             }
         ]
 
         setFilterOptions(filters);
     },[])
+
+    const filterResults = () => {
+        if (typeFilter !== null) {
+            const typeFilterRes = originalData.filter((item) => item.type === typeFilter)
+            setData(typeFilterRes)
+        }
+        if (colorFilter !== null) {
+            const colorFilterRes = originalData.filter((item) => item.color === colorFilter)
+            setData(colorFilterRes)
+        }
+        if (priceFilter !== null) {
+            const priceFilterRes = originalData.filter((item) => priceFilter.minValue <= item.price && item.price <= priceFilter.maxValue)
+            setData(priceFilterRes)
+        }
+        if (genderFilter !== null) {
+            const genderFilterRes = originalData.filter((item) => item.gender === genderFilter)
+            setData(genderFilterRes)
+        }
+    }
 
     console.log(typeFilter, colorFilter, priceFilter, genderFilter);
 
@@ -85,6 +104,7 @@ const Products = ({ data }) => {
                         setColorFilter(null)
                         setPriceFilter(null)
                         setGenderFilter(null)
+                        setData(originalData)
                     }}>Clear all</div>
                 </div>
                 {filterOptions.map((item, index) => (
@@ -117,6 +137,7 @@ const Products = ({ data }) => {
                         ))}
                     </div>
                 ))}
+                <button onClick={filterResults}>Apply Filter</button>
             </div>
             <div className="products-container">
                 {data.map((item) => (

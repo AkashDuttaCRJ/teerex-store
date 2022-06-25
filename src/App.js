@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <Navbar activeEl={activeNavEl} setActiveEl={setActiveNavEl} />
-      {activeNavEl === 0 && data && <Products data={data} />}
+      {activeNavEl === 0 && data && <Products data={data} setData={setData} originalData={response} />}
       {activeNavEl === 1 && <Cart />}
     </div>
   );
