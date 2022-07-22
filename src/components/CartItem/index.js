@@ -9,6 +9,7 @@ const CartItem = ({ item }) => {
 
     useEffect(() => {
         setItemInCart(cartItems.find(cartItem => cartItem.id === item.id))
+        // eslint-disable-next-line 
     },[cartItems])
 
   return (
