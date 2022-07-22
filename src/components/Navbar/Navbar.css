@@ -12,6 +12,7 @@
 .nav-logo {
     font-weight: bold;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .nav-elements {
@@ -21,17 +22,39 @@
 
 .nav-link {
     margin-right: 30px;
-    border-bottom: 3px solid transparent;
+    color: hsla(0, 0%, 100%, 0.8);
     cursor: pointer;
     transition: all 300ms ease;
+    position: relative;
 }
 
 .nav-link:hover {
-    border-bottom: 3px solid #ffffff29;
+    color: #ffffff;
 }
 
 .active-link {
-    border-bottom: 3px solid #ffffff95;
+    color: #ffffff;
+}
+
+.active-link::before {
+    content: "";
+    width: 0;
+    height: 3px;
+    border-radius: 4px;
+    background-color: #fff;
+    animation: grow 300ms ease forwards;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+}
+
+@keyframes grow {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 40px;
+    }
 }
 
 .cart-icon-btn {

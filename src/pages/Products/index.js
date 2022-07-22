@@ -8,6 +8,7 @@ const Products = ({ data, setData, originalData }) => {
     const [colorFilter, setColorFilter] = useState(null)
     const [priceFilter, setPriceFilter] = useState(null)
     const [genderFilter, setGenderFilter] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     const getColour = (dataset) => {
         const colors = []
@@ -69,25 +70,29 @@ const Products = ({ data, setData, originalData }) => {
         ]
 
         setFilterOptions(filters);
+        setData(originalData);
+        // eslint-disable-next-line
     },[])
 
     const filterResults = () => {
-        if (typeFilter !== null) {
-            const typeFilterRes = originalData.filter((item) => item.type === typeFilter)
-            setData(typeFilterRes)
-        }
-        if (colorFilter !== null) {
-            const colorFilterRes = originalData.filter((item) => item.color === colorFilter)
-            setData(colorFilterRes)
-        }
-        if (priceFilter !== null) {
-            const priceFilterRes = originalData.filter((item) => priceFilter.minValue <= item.price && item.price <= priceFilter.maxValue)
-            setData(priceFilterRes)
-        }
-        if (genderFilter !== null) {
-            const genderFilterRes = originalData.filter((item) => item.gender === genderFilter)
-            setData(genderFilterRes)
-        }
+        setLoading(true)
+        // filter data based on filter options
+        const filteredData = originalData.filter(item => {
+            if (typeFilter && item.type !== typeFilter) {
+                return false
+            }
+            if (colorFilter && item.color !== colorFilter) {
+                return false
+            }
+            if (priceFilter && ((item.price < priceFilter?.minValue) || (item.price > priceFilter?.maxValue))) {
+                return false
+            }
+            if (genderFilter && item.gender !== genderFilter) {
+                return false
+            } else return item
+        })
+        setData(filteredData)
+        setLoading(false)
     }
 
     console.log(typeFilter, colorFilter, priceFilter, genderFilter);
@@ -137,18 +142,18 @@ const Products = ({ data, setData, originalData }) => {
                         ))}
                     </div>
                 ))}
-                <button onClick={filterResults}>Apply Filter</button>
+                <button className='apply-filter-btn' onClick={filterResults} disabled={!typeFilter && !colorFilter && !priceFilter && !genderFilter}>Apply Filter</button>
             </div>
             <div className="products-container">
-                {data.map((item) => (
-                <ProductCard 
-                    key={item.id} 
-                    imgSrc={item.imageURL} 
-                    name={item.name} 
-                    currency={item.currency} 
-                    price={item.price}
-                    maxUnit={item.quantity}
-                />))}
+            {loading ? 
+                    <div>Loading...</div> : 
+                    data.length === 0 ? 
+                        <div className='no-results'>No results found ☹️</div> :
+                        data.map((item) => (
+                        <ProductCard 
+                            key={item.id} 
+                            item={item}
+                        />))}
             </div>
         </div>   
     </div>

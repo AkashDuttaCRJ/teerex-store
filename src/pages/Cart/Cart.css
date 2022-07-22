@@ -1,0 +1,12 @@
+.cart-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.cart-total {
+    float: right;
+    margin-right: 2rem;
+    margin-top: 1.5rem;
+}

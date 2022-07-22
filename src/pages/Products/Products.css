@@ -1,16 +1,20 @@
 .products-page {
+    width: 100%;
 }
 
 .results-container {
     display: flex;
-    padding-inline: 2rem;
+    width: 100%;
+    overflow: hidden;
+    height: calc(100vh - 3rem - 1rem);
 }
 
 .filter-container {
     margin-top: 3rem;
-    width: 25%;
+    min-width: 15rem;
+    max-width: 20rem;
     justify-content: start;
-    padding-inline: 3rem;
+    padding-inline: 1.5rem;
 }
 
 .filter-header {
@@ -39,9 +43,10 @@
 .products-container {
     margin-top: 3rem;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-    /* width: 70%; */
+    width: 100%;
+    overflow-y: scroll;
 }
 
 .filter-group {
@@ -50,4 +55,25 @@
 
 .filter-item {
     margin-left: 15px;
+}
+
+.apply-filter-btn {
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-top: 1rem;
+    float: right;
+    cursor: pointer;
+}
+
+.apply-filter-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.no-results {
+    width: 100%;
+    text-align: center;
 }
