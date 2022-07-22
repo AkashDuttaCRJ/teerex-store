@@ -14,7 +14,6 @@ function App() {
   useEffect(() => {
     const getData = async () => {
       const resp = await (await fetch(url)).json()
-      console.log(resp);
       setResponse(resp)
       setData(resp)
     }

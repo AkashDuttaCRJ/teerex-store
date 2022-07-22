@@ -21,6 +21,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap-reverse;
 }
 
 .cart-item-quantity {
@@ -34,4 +35,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+@media only screen and (max-width: 500px) {
+    .cart-item-container {
+        height: 15vh;
+        padding: 0.6rem 1rem;
+    }
+
+    .cart-item-details {
+        margin-inline: 1rem;
+    }
 }

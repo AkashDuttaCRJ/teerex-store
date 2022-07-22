@@ -86,3 +86,20 @@
     opacity: 0.5;
     cursor: default;
 }
+
+@media only screen and (max-width: 500px) {
+    .product-card {
+        width: calc(100% - 1rem);
+        aspect-ratio: 4 / 3;
+        margin: auto;
+    }
+
+    .add-to-cart {
+        padding: 10px;
+    }
+
+    .cart-btn {
+        width: 90px;
+        padding-block: 0.5rem;
+    }
+}

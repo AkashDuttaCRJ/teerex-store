@@ -98,3 +98,13 @@
     width: 60%;
     object-fit: contain;
 }
+
+@media only screen and (max-width: 500px) {
+    .nav-container {
+        padding-inline: 1rem;
+    }
+
+    .nav-link {
+        display: none;
+    }
+}
